@@ -1,0 +1,69 @@
+.\.venv\Scripts\spark-submit --driver-memory 24g --conf spark.executor.memoryOverhead=2048m --conf spark.driver.memoryOverhead=1024m --conf spark.sql.shuffle.partitions=200 .\3B.py .\ratings10M.csv --bucket_length 0.01 --num_hash_tables 30 --distance_threshold 0.8 --discard 5000
+25/06/01 21:24:39 WARN Shell: Did not find winutils.exe: java.io.FileNotFoundException: java.io.FileNotFoundException: HADOOP_HOME and hadoop.home.dir are unset. -see https://wiki.apache.org/hadoop/WindowsProblems
+25/06/01 21:24:39 INFO SparkContext: Running Spark version 3.5.5
+25/06/01 21:24:39 INFO SparkContext: OS info Windows 11, 10.0, amd64
+25/06/01 21:24:39 INFO SparkContext: Java version 11.0.27
+25/06/01 21:24:40 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/06/01 21:24:40 INFO ResourceUtils: ==============================================================
+25/06/01 21:24:40 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/06/01 21:24:40 INFO ResourceUtils: ==============================================================
+25/06/01 21:24:40 INFO SparkContext: Submitted application: LSH MovieLens Recommender (file: ratings10M.csv)
+25/06/01 21:24:40 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memoryOverhead -> name: memoryOverhead, amount: 2048, script: , vendor: , cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/06/01 21:24:40 INFO ResourceProfile: Limiting resource is cpu
+25/06/01 21:24:40 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/06/01 21:24:40 INFO SecurityManager: Changing view acls to: kiko
+25/06/01 21:24:40 INFO SecurityManager: Changing modify acls to: kiko
+25/06/01 21:24:40 INFO SecurityManager: Changing view acls groups to:
+25/06/01 21:24:40 INFO SecurityManager: Changing modify acls groups to:
+25/06/01 21:24:40 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: kiko; groups with view permissions: EMPTY; users with modify permissions: kiko; groups with modify permissions: EMPTY
+25/06/01 21:24:40 INFO Utils: Successfully started service 'sparkDriver' on port 62651.
+25/06/01 21:24:40 INFO SparkEnv: Registering MapOutputTracker
+25/06/01 21:24:40 INFO SparkEnv: Registering BlockManagerMaster
+25/06/01 21:24:40 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/06/01 21:24:40 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/06/01 21:24:40 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/06/01 21:24:40 INFO DiskBlockManager: Created local directory at C:\Users\kkiko\AppData\Local\Temp\blockmgr-432f26fe-137a-4c01-ba19-6d5f6a7f12fc
+25/06/01 21:24:40 INFO MemoryStore: MemoryStore started with capacity 14.2 GiB
+25/06/01 21:24:40 INFO SparkEnv: Registering OutputCommitCoordinator
+25/06/01 21:24:40 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+25/06/01 21:24:40 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/06/01 21:24:40 INFO Executor: Starting executor ID driver on host Kiko.home
+25/06/01 21:24:40 INFO Executor: OS info Windows 11, 10.0, amd64
+25/06/01 21:24:40 INFO Executor: Java version 11.0.27
+25/06/01 21:24:40 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+25/06/01 21:24:40 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@2cd9d0b9 for default.
+25/06/01 21:24:40 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 62702.
+25/06/01 21:24:40 INFO NettyBlockTransferService: Server created on Kiko.home:62702
+25/06/01 21:24:40 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/06/01 21:24:40 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, Kiko.home, 62702, None)
+25/06/01 21:24:40 INFO BlockManagerMasterEndpoint: Registering block manager Kiko.home:62702 with 14.2 GiB RAM, BlockManagerId(driver, Kiko.home, 62702, None)
+25/06/01 21:24:40 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, Kiko.home, 62702, None)
+25/06/01 21:24:40 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, Kiko.home, 62702, None)
+Starting LSH Recommender with parameters:
+  File Path: .\ratings10M.csv
+  Bucket Length: 0.01
+  Num Hash Tables: 30
+  Distance Threshold (Cosine Similarity): 0.8
+Number of ratings: 10000054
+
+Fitting LSH model...
+25/06/01 21:25:05 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.blas.JNIBLAS
+Euclidean distance threshold for LSH join: 0.6324555320336758
+Performing approximate similarity join...
+25/06/01 21:25:19 WARN DAGScheduler: Broadcasting large task binary with size 16.5 MiB
+25/06/01 21:25:23 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+25/06/01 21:25:28 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+25/06/01 21:25:33 WARN DAGScheduler: Broadcasting large task binary with size 16.5 MiB
+25/06/01 21:26:15 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+25/06/01 21:26:58 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+
+--- Final RMSE of LSH-based model on test set: 0.8857288521565345 ---
+Saving predictions to predictions_ratings10M_bl0.01_nht30_dt0.8
+25/06/01 21:28:49 WARN DAGScheduler: Broadcasting large task binary with size 16.5 MiB
+25/06/01 21:28:51 WARN DAGScheduler: Broadcasting large task binary with size 16.5 MiB
+25/06/01 21:28:55 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+25/06/01 21:28:57 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+25/06/01 21:30:04 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+25/06/01 21:30:23 WARN DAGScheduler: Broadcasting large task binary with size 16.6 MiB
+
+Stopping Spark session.
