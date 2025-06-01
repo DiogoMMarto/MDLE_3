@@ -1,4 +1,7 @@
 ml-20m/*
+ml-10m/*
+ml-1m/*
+ratings*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -77,7 +77,8 @@ def main(file_path: str, bucket_length: float, num_hash_tables: int, distance_th
         ).agg({"squared_error": "avg"}).collect()[0][0] ** 0.5
         return rmse
 
-    length_user = train_df.select("userId").distinct().count() +1
+    max_user_id = train_df.select(max("userId")).collect()[0][0]
+    length_user = max_user_id + 1  # Assuming userId starts from 0
     @udf(returnType=VectorUDT())
     def build_sparse_vector(ratings_list):
         if not ratings_list:
